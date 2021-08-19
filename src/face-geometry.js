@@ -54,7 +54,7 @@ AFRAME.registerComponent('track-face', {
 
   onResults: function(results) {
 
-    if (results.multiFaceLandmarks) {
+    if (results.multiFaceLandmarks[0]) {
 
       var minX = 100;
       var maxX = -100;
