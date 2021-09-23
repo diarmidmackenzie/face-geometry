@@ -106,6 +106,8 @@ A *proper* mapping to 3D space requires:
 
 I haven't tried to tackle either of these yet.
 
+- The Google Facemesh docs point to a [Face Geometry module](https://github.com/google/mediapipe/tree/master/mediapipe/modules/face_geometry) that apparently does the necessary maths.  That's potentially pretty helpful, except that it's written in C++, so would need porting to JS (or compilation into WASM , maybe?).
+
 Until this is resolved, this is pretty much unusable for any AR applications where you want to overlay A-Frame objects over the camera feed.... but it might be usable if you wanted to render a 3D version of someone's face, matching their expressions etc., without worrying about alignment with the camera feed.
 
 
