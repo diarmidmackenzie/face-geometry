@@ -16,14 +16,14 @@ So far, this is very limited.  Depending on my time & interest, it may grow over
 
 3 things that may be of interest:
 
-- original - this is a direct copy/past of Google's javascript example from their docs here: https://google.github.io/mediapipe/solutions/face_mesh.html#javascript-solution-api
+- [original](https://diarmidmackenzie.github.io/face-geometry/mediapipe/original.html) - this is a direct copy/past of Google's javascript example from their docs here: https://google.github.io/mediapipe/solutions/face_mesh.html#javascript-solution-api
 
-- testing - a simple side-by-side display of the original camera, and the face-mesh - with the ability to toggle on/off display of parts of the mesh.
+- [testing](https://diarmidmackenzie.github.io/face-geometry/testing/face-mesh-testing.html) - a simple side-by-side display of the original camera, and the face-mesh - with the ability to toggle on/off display of parts of the mesh.
 
   - Intended for looking at how good individual parts of the mesh (e.g. lips) are at tracking that feature.
   - Some of these are known to be not great - see "How accurate is Google Mediapipe Facemesh" below.
 
-- basic-example - an example that shows facemesh rolled up into an A-Frame component
+- [basic-example](https://diarmidmackenzie.github.io/face-geometry/examples/basic-example.html) - an example that shows facemesh rolled up into an A-Frame component
 
   - This displays the index of each point in the face mesh
   - It also shows the full range of the points on each of the x, y & z axes.
@@ -80,11 +80,11 @@ If you've ever drawn a one-point perspective drawing, with a single vanishing po
 - each point has x/y co-ordinates which indicate a line radiating from the vanishing point 
 - the z point indicates where on this line the point lies, with zero being a plane a short way in front of the camera (I believe zero is the average position of all the points, but don't quote me on that).
 
-Interestingly, the model doesn't actually have any idea how far away the face is (i.e. what the true z co-ordinate is).  If you go to the basic-example.html, and move forwards/backwards you'll see that the range of z-coordinates doesn't change as you'd expect if the co-ordinates were regular x/y/z co-ordinates in A-Frame.
+Interestingly, the model doesn't actually have any idea how far away the face is (i.e. what the true z co-ordinate is).  If you go to the [basic-example.html](https://diarmidmackenzie.github.io/face-geometry/examples/basic-example.html), and move your face forwards/backwards you'll see that the range of z-coordinates doesn't change as you'd expect if the co-ordinates were regular x/y/z co-ordinates in A-Frame.
 
 How does my basic example convert these into A-Frame co-ordinates?
 
-Well, it just uses them as x/y/z co-ordinate offsets, relative to a fixed point.  That's encoded in the HTML as
+Well, it ignores all these subtleties, and just uses them as x/y/z co-ordinate offsets, relative to a fixed point.  That's encoded in the HTML as
 
 ```
 position = "-0.5 2.1 -1.15"
@@ -93,6 +93,8 @@ position = "-0.5 2.1 -1.15"
 (noting camera height is y=1.6)
 
 Why these values?  Well, they seemed to make things fit about right...!
+
+This looks *ok* when the face is in the center of the screen, but it starts to get significantly misaligned when the face moves to the edge of the screen.
 
 A *proper* mapping to 3D space requires:
 
