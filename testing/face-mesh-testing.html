@@ -1,0 +1,32 @@
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="face-mesh-testing.css">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="controls">
+    <input type="checkbox" id="mesh" name="mesh" value="mesh" checked>
+      <label for="vehicle1">Mesh</label><br>
+    <input type="checkbox" id="eyes" name="eyes" value="eyes" checked>
+        <label for="vehicle1">Eyes</label><br>
+    <input type="checkbox" id="eyebrows" name="eyebrows" value="eyebrows" checked>
+        <label for="vehicle1">Eyebrows</label><br>
+    <input type="checkbox" id="face" name="face" value="face" checked>
+        <label for="vehicle1">Face outline</label><br>
+    <input type="checkbox" id="lips" name="lips" value="lips" checked>
+        <label for="vehicle1">Lips</label><br>
+  </div>
+  <div class="container">
+    <video class="input_video"></video>
+    <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+  </div>
+  <script src="./face-mesh-testing.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.controls {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  background: white;
+  z-index: 2;
+  padding: 5px;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 1;
+}
+.input_video {
+  width: 50%;
+}
+.output_canvas {
+  width: 50%;
+}
