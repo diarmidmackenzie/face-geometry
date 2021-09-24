@@ -29,6 +29,10 @@ So far, this is very limited.  Depending on my time & interest, it may grow over
   - It also shows the full range of the points on each of the x, y & z axes.
   - However there are issues with the mapping into 3D space - see below.  These become particularly evident when the face is to the left or right of the screen.
 
+- [block-head](https://diarmidmackenzie.github.io/face-geometry/examples/block-head.html) - a minecraft-style cubs-shaped head, animated to match your expressions.
+
+  - Matches head tilt, eye height, eyebrow position & mouth height & width.
+
   
 
 ## How accurate is Google Mediapipe Facemesh?
@@ -109,6 +113,14 @@ I haven't tried to tackle either of these yet.
 - The Google Facemesh docs point to a [Face Geometry module](https://github.com/google/mediapipe/tree/master/mediapipe/modules/face_geometry) that apparently does the necessary maths.  That's potentially pretty helpful, except that it's written in C++, so would need porting to JS (or compilation into WASM , maybe?).
 
 Until this is resolved, this is pretty much unusable for any AR applications where you want to overlay A-Frame objects over the camera feed.... but it might be usable if you wanted to render a 3D version of someone's face, matching their expressions etc., without worrying about alignment with the camera feed.
+
+
+
+## What are the indices of points in the face mesh?
+
+Take a look here...
+
+https://raw.githubusercontent.com/google/mediapipe/master/mediapipe/modules/face_geometry/data/canonical_face_model_uv_visualization.png
 
 
 
