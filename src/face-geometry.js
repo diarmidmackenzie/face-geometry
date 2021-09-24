@@ -1,5 +1,6 @@
 AFRAME.registerComponent('track-face', {
   schema: {
+    mirror: {type: 'boolean', default: false}
   },
 
   init: function() {
@@ -65,10 +66,11 @@ AFRAME.registerComponent('track-face', {
 
       for (ii = 0; ii < 468; ii++) {
         const marker = results.multiFaceLandmarks[0][ii]
+        const mirror = this.data.mirror ? -1 : 1
         if (marker) {
-          this.points[ii].object3D.position.x = marker.x;
+          this.points[ii].object3D.position.x = mirror * marker.x;
           this.points[ii].object3D.position.y = -marker.y;
-          this.points[ii].object3D.position.z = marker.z;
+          this.points[ii].object3D.position.z = -marker.z;
 
           if (marker.x > maxX) {maxX = marker.x}
           if (marker.x < minX) {minX = marker.x}

@@ -1,0 +1,49 @@
+<html>
+  <head>
+  <meta charset="utf-8">
+  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4/face_mesh.js" crossorigin="anonymous"></script>
+  <script src="../src/block-head.js"></script>
+  <script src="../src/face-geometry.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <video class="input_video" style="display:none"></video>
+      <div class="canvas-container">
+        <a-scene embedded stats renderer="colorManagement:true">
+          <a-box id="head" position ="0 1.6 -2" material="color:pink" block-head>
+            <a-box id="left-eye" position ="0.25 0.15 0.5"
+                                 scale="0.2 0.2 0.05"
+                              material="color:white">
+            </a-box>
+            <a-box id="left-pupil" position ="0.25 0.15 0.5"
+                                   scale="0.05 0.05 0.06"
+                                   material="color:black">
+            </a-box>
+            <a-box id="left-eyebrow" position ="0.25 0.3 0.5"
+                                 scale="0.2 0.05 0.05"
+                                 material="color:brown">
+            </a-box>
+            <a-box id="right-eye" position ="-0.25 0.15 0.5"
+                                  scale="0.2 0.2 0.05"
+                                  material="color:white">
+            </a-box>
+            <a-box id="right-pupil" position ="-0.25 0.15 0.5"
+                                   scale="0.05 0.05 0.06"
+                                   material="color:black">
+            </a-box>
+            <a-box id="right-eyebrow" position ="-0.25 0.3 0.5"
+                                     scale="0.2 0.05 0.05"
+                                     material="color:brown">
+            </a-box>
+            <a-box id="mouth" position ="0 -0.25 0.5"
+                              scale = "0.3 0.1 0.05"
+                              material="color:red">
+            </a-box>
+          </a-box>
+        </a-scene>
+      </div>
+    </div>
+  </body>
+</html>
