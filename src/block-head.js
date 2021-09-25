@@ -208,8 +208,12 @@ AFRAME.registerComponent('box-uvs', {
       combinedUVs.set([face[0], face[3], face[0], face[1], face[2], face[3]], offset)
       combinedUVs.set([face[0], face[1], face[2], face[1], face[2], face[3]], offset + 6)
     }
-    const geometry = this.el.getObject3D('mesh').geometry;
-    combinedUVs = new Float32Array(72)
+
+    // to modify the uvs without messing up other boxes, we need a new geometry.
+    this.geometry = new THREE.BufferGeometry
+
+    this.geometry.copy(this.el.getObject3D('mesh').geometry);
+    const combinedUVs = new Float32Array(72)
     const frontUVs = uvArrayFromData(this.data.front, combinedUVs, 48)
     const backUVs = uvArrayFromData(this.data.back, combinedUVs, 60)
     const topUVs = uvArrayFromData(this.data.top, combinedUVs, 24)
@@ -217,8 +221,9 @@ AFRAME.registerComponent('box-uvs', {
     const leftUVs = uvArrayFromData(this.data.left, combinedUVs, 12)
     const rightUVs = uvArrayFromData(this.data.right, combinedUVs, 0)
 
-    geometry.setAttribute('uv', new THREE.BufferAttribute(combinedUVs, 2));
-    geometry.uvsNeedUpdate = true;
+    this.geometry.setAttribute('uv', new THREE.BufferAttribute(combinedUVs, 2));
+    this.geometry.uvsNeedUpdate = true;
+    this.el.getObject3D('mesh').geometry = this.geometry
   }
 });
 
