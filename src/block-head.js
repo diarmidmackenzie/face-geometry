@@ -70,6 +70,7 @@ AFRAME.registerComponent('block-head', {
     this.rightEye = document.querySelector("#right-eye")
     this.rightPupil = document.querySelector("#right-pupil")
     this.rightEyebrow = document.querySelector("#right-eyebrow")
+
   },
 
   vectorBetweenPoints: function(index1, index2, returnVector) {
@@ -126,6 +127,10 @@ AFRAME.registerComponent('block-head', {
 
       this.el.object3D.quaternion.multiplyQuaternions(this.quaternionA,
                                                       this.quaternionB)
+
+
+      //const material = this.el.getObject3D('mesh').material;
+      //material.map.magFilter = THREE.NearestFilter;
     }
   },
 
@@ -177,8 +182,62 @@ AFRAME.registerComponent('block-head', {
                                            this.vectorA).length()
     height2 = height2 / this.faceYLength
 
-    // adjust eyebrow position from default of y=0.3
-    eyebrow.object3D.position.y = 0.15 + height2
+    // adjust eyebrow position from default of y=0.15
+    eyebrow.object3D.position.y = height2 - 0.05
   }
 
+});
+
+AFRAME.registerComponent('box-uvs', {
+
+  // 4 values in each array are:
+  //bottom left x, y, top left x, y.
+  schema: {
+    front: {type: 'array', default: '0,0,1,1'},
+    back: {type: 'array', default: '0,0,1,1'},
+    top: {type: 'array', default: '0,0,1,1'},
+    bottom: {type: 'array', default: '0,0,1,1'},
+    left: {type: 'array', default: '0,0,1,1'},
+    right: {type: 'array', default: '0,0,1,1'}
+  },
+
+  init() {
+
+    function uvArrayFromData(face, combinedUVs, offset) {
+      // first: bottom right, bottom left, top right.
+      combinedUVs.set([face[0], face[3], face[0], face[1], face[2], face[3]], offset)
+      combinedUVs.set([face[0], face[1], face[2], face[1], face[2], face[3]], offset + 6)
+    }
+    const geometry = this.el.getObject3D('mesh').geometry;
+    combinedUVs = new Float32Array(72)
+    const frontUVs = uvArrayFromData(this.data.front, combinedUVs, 48)
+    const backUVs = uvArrayFromData(this.data.back, combinedUVs, 60)
+    const topUVs = uvArrayFromData(this.data.top, combinedUVs, 24)
+    const bottomUVs = uvArrayFromData(this.data.bottom, combinedUVs, 36)
+    const leftUVs = uvArrayFromData(this.data.left, combinedUVs, 12)
+    const rightUVs = uvArrayFromData(this.data.right, combinedUVs, 0)
+
+    geometry.setAttribute('uv', new THREE.BufferAttribute(combinedUVs, 2));
+    geometry.uvsNeedUpdate = true;
+  }
+});
+
+AFRAME.registerComponent('material-pixellated', {
+  schema: {
+    src: { type: 'selector'}
+  },
+
+  init() {
+  },
+  update () {
+    const texture = new THREE.TextureLoader().load(this.data.src.currentSrc)
+    texture.magFilter = THREE.NearestFilter;
+
+    console.log(texture)
+
+    const material = new THREE.MeshStandardMaterial({
+      map: texture
+    })
+    this.el.getObject3D('mesh').material = material;
+  }
 });

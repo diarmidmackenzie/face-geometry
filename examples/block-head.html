@@ -12,32 +12,43 @@
       <video class="input_video" style="display:none"></video>
       <div class="canvas-container">
         <a-scene embedded stats renderer="colorManagement:true">
-          <a-box id="head" position ="0 1.6 -2" material="color:pink" block-head>
-            <a-box id="left-eye" position ="0.25 0.15 0.5"
-                                 scale="0.2 0.2 0.05"
+          <a-assets>
+            <img id="steve-skin" src="../assets/minecraft/skins/steve.png">
+          </a-assets>
+          <a-box id="head" position ="0 1.6 -2"
+                           box-uvs ="front: 0.125,0.75,0.25,0.875;
+                                     back: 0.375,0.75,0.5,0.875;
+                                     left: 0,0.75,0.125,0.875;
+                                     right: 0.25,0.75,0.375,0.875;
+                                     top: 0.125,0.875,0.25,1;
+                                     bottom: 0.25,0.875,0.375,1"
+                           block-head
+                           material-pixellated="src: #steve-skin">
+            <a-box id="left-eye" position ="0.25 -0.05 0.5"
+                                 scale="0.25 0.2 0.05"
                               material="color:white">
             </a-box>
-            <a-box id="left-pupil" position ="0.25 0.15 0.5"
+            <a-box id="left-pupil" position ="0.25 -0.05 0.5"
                                    scale="0.05 0.05 0.06"
                                    material="color:black">
             </a-box>
-            <a-box id="left-eyebrow" position ="0.25 0.3 0.5"
+            <a-box id="left-eyebrow" position ="0.25 0.1 0.5"
                                  scale="0.2 0.05 0.05"
                                  material="color:brown">
             </a-box>
-            <a-box id="right-eye" position ="-0.25 0.15 0.5"
-                                  scale="0.2 0.2 0.05"
+            <a-box id="right-eye" position ="-0.25 -0.05 0.5"
+                                  scale="0.25 0.2 0.05"
                                   material="color:white">
             </a-box>
-            <a-box id="right-pupil" position ="-0.25 0.15 0.5"
+            <a-box id="right-pupil" position ="-0.25 -0.05 0.5"
                                    scale="0.05 0.05 0.06"
                                    material="color:black">
             </a-box>
-            <a-box id="right-eyebrow" position ="-0.25 0.3 0.5"
+            <a-box id="right-eyebrow" position ="-0.25 0.1 0.5"
                                      scale="0.2 0.05 0.05"
                                      material="color:brown">
             </a-box>
-            <a-box id="mouth" position ="0 -0.25 0.5"
+            <a-box id="mouth" position ="0 -0.35 0.5"
                               scale = "0.3 0.1 0.05"
                               material="color:red">
             </a-box>
